@@ -1,0 +1,809 @@
+.profile-page {
+  --hk-panel: rgba(7, 12, 24, 0.72);
+  --hk-panel-strong: rgba(10, 16, 34, 0.9);
+  --hk-border: rgba(107, 136, 255, 0.38);
+  --hk-border-strong: rgba(140, 170, 255, 0.7);
+  --hk-text: #f1f6ff;
+  --hk-text-dim: #afc2e4;
+  --hk-accent-bright: #8aa7ff;
+  --hk-accent-rgb: 138, 167, 255;
+  --hk-primary-rgb: 91, 116, 255;
+  --hk-glitch-hot-rgb: 255, 92, 174;
+  --hk-glitch-cold-rgb: 97, 224, 255;
+  --hk-glitch-line: rgba(212, 228, 255, 0.62);
+  --hk-glitch-shadow-a: -2px 0 rgba(var(--hk-glitch-hot-rgb), 0.72), 2px 0 rgba(var(--hk-glitch-cold-rgb), 0.68);
+  --hk-glitch-shadow-b: 2px 0 rgba(var(--hk-glitch-hot-rgb), 0.72), -2px 0 rgba(var(--hk-glitch-cold-rgb), 0.68);
+  --hk-danger: #ff5d7d;
+  --hk-ok: #73ffd1;
+  --hk-ui-size: 11px;
+  --hk-ui-track: 0.08em;
+  --hk-gap: 8px;
+  --hk-block-pad: 12px;
+
+  color: var(--hk-text);
+  background:
+    radial-gradient(1200px 500px at 15% -10%, rgba(var(--hk-primary-rgb), 0.28), transparent 60%),
+    radial-gradient(900px 400px at 90% 0%, rgba(var(--hk-accent-rgb), 0.16), transparent 58%),
+    linear-gradient(180deg, #060a14 0%, #05070d 45%, #03050a 100%);
+  position: relative;
+}
+
+.profile-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.profile-page .container {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes hk-glitch-tear {
+  0%,
+  96% {
+    opacity: 0;
+    top: -10%;
+  }
+  97.2% {
+    opacity: 0.95;
+    top: 18%;
+  }
+  98.1% {
+    top: 44%;
+    transform: translateX(4px);
+  }
+  99% {
+    top: 80%;
+    transform: translateX(-3px);
+    opacity: 0.38;
+  }
+  100% {
+    top: 110%;
+    opacity: 0;
+  }
+}
+
+@keyframes hk-glitch-jitter-a {
+  0%,
+  95.5%,
+  100% {
+    transform: none;
+  }
+  96.2% {
+    transform: translateX(2px) skewX(1.2deg);
+  }
+  97% {
+    transform: translateX(-3px) skewX(-1deg);
+  }
+  97.8% {
+    transform: translateX(1px) skewX(0.6deg);
+  }
+}
+
+@keyframes hk-glitch-jitter-b {
+  0%,
+  96.2%,
+  100% {
+    transform: none;
+  }
+  96.7% {
+    transform: translateX(-2px) skewX(-1.2deg);
+  }
+  97.4% {
+    transform: translateX(3px) skewX(0.9deg);
+  }
+  98.2% {
+    transform: translateX(-1px) skewX(-0.5deg);
+  }
+}
+
+@keyframes hk-glitch-rgb-a {
+  0%,
+  97.1%,
+  100% {
+    text-shadow: none;
+  }
+  97.8% {
+    text-shadow: var(--hk-glitch-shadow-a);
+  }
+  98.5% {
+    text-shadow: var(--hk-glitch-shadow-b);
+  }
+}
+
+@keyframes hk-glitch-rgb-b {
+  0%,
+  96.8%,
+  100% {
+    text-shadow: none;
+  }
+  97.6% {
+    text-shadow: var(--hk-glitch-shadow-b);
+  }
+  98.3% {
+    text-shadow: var(--hk-glitch-shadow-a);
+  }
+}
+
+@keyframes hk-glitch-slice-a {
+  0%,
+  97%,
+  100% {
+    transform: none;
+    clip-path: none;
+  }
+  97.7% {
+    transform: translateX(3px);
+    clip-path: inset(0 0 56% 0);
+  }
+  98.4% {
+    transform: translateX(-2px);
+    clip-path: inset(46% 0 0 0);
+  }
+  99.1% {
+    transform: translateX(2px);
+    clip-path: inset(12% 0 68% 0);
+  }
+}
+
+@keyframes hk-glitch-slice-b {
+  0%,
+  96.5%,
+  100% {
+    transform: none;
+    clip-path: none;
+  }
+  97.2% {
+    transform: translateX(-3px);
+    clip-path: inset(0 0 60% 0);
+  }
+  97.9% {
+    transform: translateX(2px);
+    clip-path: inset(58% 0 0 0);
+  }
+  98.6% {
+    transform: translateX(-1px);
+    clip-path: inset(24% 0 46% 0);
+  }
+}
+
+@keyframes hk-glitch-block-a {
+  0%,
+  89%,
+  100% {
+    opacity: 0;
+    background: none;
+    transform: translateX(0);
+  }
+  93% {
+    opacity: 0.85;
+    background:
+      linear-gradient(transparent 14%, rgba(var(--hk-accent-rgb), 0.14) 14%, rgba(var(--hk-accent-rgb), 0.14) 22%, transparent 22%),
+      linear-gradient(transparent 52%, rgba(var(--hk-glitch-cold-rgb), 0.2) 52%, rgba(var(--hk-glitch-cold-rgb), 0.2) 58%, transparent 58%);
+    transform: translateX(4px);
+  }
+  97% {
+    opacity: 0.72;
+    background:
+      linear-gradient(transparent 32%, rgba(var(--hk-glitch-hot-rgb), 0.2) 32%, rgba(var(--hk-glitch-hot-rgb), 0.2) 40%, transparent 40%),
+      linear-gradient(transparent 74%, rgba(var(--hk-accent-rgb), 0.14) 74%, rgba(var(--hk-accent-rgb), 0.14) 82%, transparent 82%);
+    transform: translateX(-5px);
+  }
+}
+
+@keyframes hk-glitch-block-b {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    background: none;
+    transform: translateX(0);
+  }
+  94% {
+    opacity: 0.82;
+    background:
+      linear-gradient(transparent 10%, rgba(var(--hk-accent-rgb), 0.16) 10%, rgba(var(--hk-accent-rgb), 0.16) 18%, transparent 18%),
+      linear-gradient(transparent 62%, rgba(var(--hk-glitch-hot-rgb), 0.18) 62%, rgba(var(--hk-glitch-hot-rgb), 0.18) 70%, transparent 70%);
+    transform: translateX(-4px);
+  }
+  98% {
+    opacity: 0.66;
+    background:
+      linear-gradient(transparent 40%, rgba(var(--hk-glitch-cold-rgb), 0.18) 40%, rgba(var(--hk-glitch-cold-rgb), 0.18) 48%, transparent 48%);
+    transform: translateX(6px);
+  }
+}
+
+.profile-page .card {
+  background: var(--hk-panel);
+  border: 1px solid var(--hk-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 14px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(var(--hk-primary-rgb), 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.profile-page .card-header {
+  background: linear-gradient(90deg, rgba(14, 26, 57, 0.95), rgba(30, 54, 106, 0.85));
+  color: var(--hk-text);
+  border-bottom: 1px solid rgba(var(--hk-accent-rgb), 0.38);
+  letter-spacing: var(--hk-ui-track);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.profile-page,
+.profile-page p,
+.profile-page li,
+.profile-page td,
+.profile-page .profile-username,
+.profile-page .profile-tagline,
+.profile-page .blurb-content {
+  color: var(--hk-text);
+}
+
+.profile-page a {
+  color: var(--hk-accent-bright);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.profile-page a:hover {
+  color: #d8e4ff;
+  text-shadow: 0 0 10px rgba(var(--hk-accent-rgb), 0.75);
+  text-decoration: none;
+}
+
+.profile-page .blurb-title,
+.profile-page .interest-title {
+  color: var(--hk-accent-bright);
+  text-transform: uppercase;
+  letter-spacing: var(--hk-ui-track);
+}
+
+.profile-page .action-btn,
+.profile-page .contact-link {
+  background: linear-gradient(180deg, rgba(40, 63, 126, 0.95), rgba(22, 37, 78, 0.95));
+  color: var(--hk-text);
+  border: 1px solid var(--hk-border-strong);
+}
+
+.profile-page .action-btn:hover,
+.profile-page .contact-link:hover {
+  background: linear-gradient(180deg, rgba(62, 89, 170, 0.98), rgba(31, 51, 104, 0.98));
+}
+
+.profile-page .profile-main-card,
+.profile-page .profile-right > .card,
+.profile-page #comments .profile-comment,
+.profile-custom-html .ops-shell,
+.profile-custom-html .ops-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-page .profile-main-card::after,
+.profile-page .profile-right > .card::after,
+.profile-page #comments .profile-comment::after,
+.profile-custom-html .ops-shell::after,
+.profile-custom-html .ops-panel::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  width: 108%;
+  height: 2px;
+  background: var(--hk-glitch-line);
+  box-shadow:
+    0 0 10px rgba(var(--hk-accent-rgb), 0.55),
+    0 1px 0 rgba(0, 0, 0, 0.85),
+    0 -1px 0 rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 8;
+  animation: hk-glitch-tear 15s steps(1, end) infinite;
+}
+
+.profile-page .profile-main-card::after {
+  animation-duration: 11s;
+  animation-delay: -6s;
+}
+
+.profile-page .profile-right > .card:nth-child(odd)::after {
+  animation-duration: 17s;
+  animation-delay: -9s;
+}
+
+.profile-page .profile-right > .card:nth-child(even)::after {
+  animation-duration: 21s;
+  animation-delay: -4s;
+}
+
+.profile-page #comments .profile-comment:nth-child(odd)::after {
+  animation-duration: 13s;
+  animation-delay: -8s;
+}
+
+.profile-page #comments .profile-comment:nth-child(even)::after {
+  animation-duration: 16s;
+  animation-delay: -5s;
+}
+
+.profile-custom-html .ops-shell::after {
+  animation-duration: 9s;
+  animation-delay: -4s;
+}
+
+.profile-custom-html .ops-panel:nth-child(odd)::after {
+  animation-duration: 12s;
+  animation-delay: -7s;
+}
+
+.profile-custom-html .ops-panel:nth-child(even)::after {
+  animation-duration: 15s;
+  animation-delay: -2s;
+}
+
+.profile-page .profile-right > .card::before,
+.profile-page #comments .profile-comment::before,
+.profile-custom-html .ops-shell::before,
+.profile-custom-html .ops-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  z-index: 7;
+  animation: hk-glitch-block-a 6.2s steps(1, end) infinite;
+}
+
+.profile-page .profile-right > .card:nth-child(even)::before,
+.profile-page #comments .profile-comment:nth-child(even)::before,
+.profile-custom-html .ops-panel:nth-child(even)::before {
+  animation-name: hk-glitch-block-b;
+  animation-duration: 7.4s;
+}
+
+.profile-page .profile-main-card {
+  animation: hk-glitch-jitter-a 29s steps(1, end) infinite;
+  animation-delay: -17s;
+}
+
+.profile-page .profile-right > .card:nth-child(odd) {
+  animation: hk-glitch-jitter-a 31s steps(1, end) infinite;
+  animation-delay: -20s;
+}
+
+.profile-page .profile-right > .card:nth-child(even) {
+  animation: hk-glitch-jitter-b 37s steps(1, end) infinite;
+  animation-delay: -9s;
+}
+
+.profile-page .profile-right > .card:nth-child(odd) .card-header,
+.profile-page .profile-left .card:nth-child(odd) .card-header,
+.profile-custom-html .ops-title,
+.profile-page #comments .comment-author-name {
+  animation: hk-glitch-rgb-a 24s steps(1, end) infinite;
+}
+
+.profile-page .profile-right > .card:nth-child(even) .card-header,
+.profile-page .profile-left .card:nth-child(even) .card-header,
+.profile-page #comments .comment-actions a {
+  animation: hk-glitch-rgb-b 27s steps(1, end) infinite;
+}
+
+.profile-custom-html .ops-title {
+  animation-duration: 11s;
+  animation-delay: -5s;
+}
+
+.profile-page .blurb-content a,
+.profile-page #comments .comment-actions a,
+.profile-custom-html .g {
+  display: inline-block;
+  transform-origin: center;
+}
+
+.profile-page .blurb-content a:nth-of-type(3n + 1),
+.profile-page #comments .comment-actions a:nth-of-type(3n + 1),
+.profile-custom-html .g:nth-of-type(3n + 1) {
+  animation: hk-glitch-slice-a 17s steps(1, end) infinite;
+}
+
+.profile-page .blurb-content a:nth-of-type(3n + 2),
+.profile-page #comments .comment-actions a:nth-of-type(3n + 2),
+.profile-custom-html .g:nth-of-type(3n + 2) {
+  animation: hk-glitch-slice-b 23s steps(1, end) infinite;
+}
+
+.profile-page .blurb-content a:nth-of-type(3n),
+.profile-page #comments .comment-actions a:nth-of-type(3n),
+.profile-custom-html .g:nth-of-type(3n) {
+  animation: hk-glitch-slice-a 19s steps(1, end) infinite;
+  animation-delay: -6s;
+}
+
+.profile-custom-html .ops-shell {
+  background: var(--hk-panel-strong);
+  border: 1px solid var(--hk-border-strong);
+  box-shadow: 0 0 24px rgba(var(--hk-primary-rgb), 0.25);
+  padding: 14px;
+  margin-top: 6px;
+  font-family: "JetBrains Mono", "Fira Code", "IBM Plex Mono", "Consolas", monospace;
+}
+
+.profile-custom-html .ops-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--hk-gap);
+  gap: var(--hk-gap);
+}
+
+.profile-custom-html .ops-lights {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.profile-custom-html .ops-lights i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.profile-custom-html .ops-lights .r { background: var(--hk-danger); }
+.profile-custom-html .ops-lights .w { background: #f4f6ff; }
+.profile-custom-html .ops-lights .b { background: #5b74ff; }
+
+.profile-custom-html .ops-title {
+  font-size: var(--hk-ui-size);
+  color: var(--hk-text-dim);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.profile-custom-html .ops-log {
+  background: rgba(2, 5, 12, 0.8);
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.22);
+  padding: 10px;
+  margin: 0 0 10px 0;
+  white-space: pre-wrap;
+  line-height: 1.55;
+  color: #dce8ff;
+  font-size: var(--hk-ui-size);
+}
+
+.profile-custom-html .ops-log .err { color: var(--hk-danger); }
+.profile-custom-html .ops-log .ok { color: var(--hk-ok); }
+.profile-custom-html .ops-log .warn { color: #ffd479; }
+
+.profile-custom-html .ops-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--hk-gap);
+}
+
+.profile-custom-html .ops-panel {
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.25);
+  background: rgba(8, 14, 28, 0.75);
+  padding: 9px;
+}
+
+.profile-custom-html .ops-panel h4 {
+  margin: 0 0 6px 0;
+  font-size: 10px;
+  color: var(--hk-accent-bright);
+  letter-spacing: var(--hk-ui-track);
+  text-transform: uppercase;
+}
+
+.profile-custom-html .ops-panel p {
+  margin: 0;
+  font-size: var(--hk-ui-size);
+  color: #eaf1ff;
+}
+
+.profile-custom-html .ops-tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.profile-custom-html .ops-tags span {
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.45);
+  background: rgba(var(--hk-primary-rgb), 0.15);
+  color: #e8f0ff;
+  padding: 2px 7px;
+  font-size: 10px;
+}
+
+.profile-custom-html .ops-ping {
+  margin-top: 10px;
+  font-size: var(--hk-ui-size);
+  color: var(--hk-text-dim);
+}
+
+.profile-custom-html .ops-ping strong {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(var(--hk-accent-rgb), 0.9);
+}
+
+@media (max-width: 700px) {
+  .profile-custom-html .ops-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Blue/Purple glitch effect for profile pic */
+.profile-page .profile-main-card .profile-avatar,
+.profile-custom-html .hx-avatar {
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgba(90, 160, 255, 0.6),
+    0 0 14px rgba(40, 110, 255, 0.5),
+    0 0 22px rgba(20, 80, 220, 0.4);
+  transform-origin: center;
+  will-change: transform, filter, opacity, clip-path;
+}
+
+.profile-page .profile-main-card > .card-body {
+  position: relative;
+}
+
+.profile-page .profile-main-card > .card-body::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 132px;
+  height: 132px;
+  transform: translateX(-50%);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(var(--hk-accent-rgb), 0.2) 0px,
+      rgba(var(--hk-accent-rgb), 0.2) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(90deg, rgba(var(--hk-glitch-hot-rgb), 0.2), rgba(var(--hk-glitch-cold-rgb), 0.2));
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 4;
+  animation: pfp-glitch-burst 5.6s steps(1, end) infinite;
+}
+
+.profile-page .profile-main-card .profile-avatar {
+  filter:
+    contrast(1.2)
+    saturate(1.35)
+    drop-shadow(-2px 0 rgba(79, 70, 229, 0.8))
+    drop-shadow(2px 0 rgba(147, 51, 234, 0.8));
+  animation:
+    pfp-glitch-extreme 1.5s steps(1, end) infinite,
+    pfp-glitch-tone 5.8s linear infinite,
+    pfp-glitch-flicker 2.9s steps(1, end) infinite;
+}
+
+.profile-custom-html .hx-avatar {
+  filter:
+    contrast(1.15)
+    saturate(1.24)
+    drop-shadow(-2px 0 rgba(79, 70, 229, 0.75))
+    drop-shadow(2px 0 rgba(147, 51, 234, 0.75));
+  animation:
+    pfp-glitch-core 2.6s steps(1, end) infinite,
+    pfp-glitch-tone 8.8s linear infinite;
+}
+
+@keyframes pfp-glitch-core {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0 round 12px);
+  }
+  94% {
+    transform: translate3d(-2px, 0, 0);
+    clip-path: inset(0 0 44% 0 round 12px);
+  }
+  96% {
+    transform: translate3d(2px, -1px, 0);
+    clip-path: inset(48% 0 0 0 round 12px);
+  }
+  98% {
+    transform: translate3d(-1px, 1px, 0);
+    clip-path: inset(12% 0 54% 0 round 12px);
+  }
+}
+
+@keyframes pfp-glitch-extreme {
+  0%,
+  86%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    clip-path: inset(0 0 0 0 round 12px);
+  }
+  88% {
+    transform: translate3d(-4px, 1px, 0) scale(1.02);
+    clip-path: inset(0 0 58% 0 round 12px);
+  }
+  90% {
+    transform: translate3d(5px, -2px, 0) scale(1.03);
+    clip-path: inset(52% 0 0 0 round 12px);
+  }
+  92% {
+    transform: translate3d(-6px, 2px, 0) scale(1.02);
+    clip-path: inset(22% 0 44% 0 round 12px);
+  }
+  94% {
+    transform: translate3d(4px, -3px, 0) scale(1.01);
+    clip-path: inset(62% 0 8% 0 round 12px);
+  }
+  96% {
+    transform: translate3d(-3px, 2px, 0) scale(1.01);
+    clip-path: inset(8% 0 70% 0 round 12px);
+  }
+  98% {
+    transform: translate3d(2px, -1px, 0) scale(1);
+    clip-path: inset(0 0 0 0 round 12px);
+  }
+}
+
+@keyframes pfp-glitch-tone {
+  0%,
+  100% {
+    filter:
+      hue-rotate(0deg)
+      contrast(1.2)
+      saturate(1.3)
+      drop-shadow(-2px 0 rgba(79, 70, 229, 0.75))
+      drop-shadow(2px 0 rgba(147, 51, 234, 0.75));
+  }
+  50% {
+    filter:
+      hue-rotate(18deg)
+      contrast(1.28)
+      saturate(1.45)
+      drop-shadow(-3px 0 rgba(79, 70, 229, 0.85))
+      drop-shadow(3px 0 rgba(147, 51, 234, 0.85));
+  }
+}
+
+@keyframes pfp-glitch-flicker {
+  0%,
+  86%,
+  100% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 0.78;
+  }
+  90% {
+    opacity: 0.96;
+  }
+  92% {
+    opacity: 0.74;
+  }
+  94% {
+    opacity: 1;
+  }
+}
+
+@keyframes pfp-glitch-burst {
+  0%,
+  82%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0);
+  }
+  86% {
+    opacity: 0.5;
+    transform: translateX(calc(-50% + 4px)) translateY(-2px);
+  }
+  90% {
+    opacity: 0.38;
+    transform: translateX(calc(-50% - 5px)) translateY(2px);
+  }
+}
+
+.profile-page #comments .card-body {
+  background: transparent;
+}
+
+.profile-page #comments .add-comment {
+  padding: var(--hk-block-pad);
+  background: linear-gradient(180deg, rgba(9, 16, 31, 0.92), rgba(4, 8, 18, 0.94));
+  border-bottom: 1px solid rgba(var(--hk-accent-rgb), 0.3);
+}
+
+.profile-page #comments .add-comment [style*="var(--vs-bg-white)"] {
+  background: rgba(6, 11, 24, 0.9) !important;
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.44) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--hk-primary-rgb), 0.14) !important;
+}
+
+.profile-page #comments .add-comment [style*="var(--vs-text-dark)"] {
+  color: var(--hk-text) !important;
+}
+
+.profile-page #comments .add-comment [style*="var(--vs-text-light)"],
+.profile-page #comments .add-comment [style*="var(--vs-text-medium)"] {
+  color: var(--hk-text-dim) !important;
+}
+
+.profile-page #comments .profile-comment {
+  margin: 0;
+  padding: var(--hk-block-pad);
+  border-top: 1px solid rgba(var(--hk-accent-rgb), 0.26);
+  background: rgba(6, 11, 24, 0.66);
+}
+
+.profile-page #comments .profile-comment:hover {
+  background: rgba(9, 16, 33, 0.82);
+}
+
+.profile-page #comments .comment-avatar {
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.48);
+  box-shadow: 0 0 14px rgba(var(--hk-primary-rgb), 0.25);
+}
+
+.profile-page #comments .comment-meta,
+.profile-page #comments .comment-time,
+.profile-page #comments .comment-actions {
+  color: var(--hk-text-dim);
+}
+
+.profile-page #comments .comment-body [style*="var(--vs-text-dark)"] {
+  color: var(--hk-text) !important;
+}
+
+.profile-page #comments [style*="var(--vs-error)"] {
+  color: var(--hk-danger) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-page .profile-main-card,
+  .profile-page .profile-right > .card,
+  .profile-page .profile-right > .card .card-header,
+  .profile-page #comments .profile-comment,
+  .profile-page #comments .comment-author-name,
+  .profile-page #comments .comment-actions a,
+  .profile-page .blurb-content a,
+  .profile-custom-html .ops-title,
+  .profile-custom-html .g,
+  .profile-page .profile-main-card .profile-avatar,
+  .profile-custom-html .hx-avatar {
+    animation: none !important;
+  }
+
+  .profile-page .profile-main-card::after,
+  .profile-page .profile-right > .card::after,
+  .profile-page .profile-right > .card::before,
+  .profile-page #comments .profile-comment::after,
+  .profile-page #comments .profile-comment::before,
+  .profile-custom-html .ops-shell::after,
+  .profile-custom-html .ops-shell::before,
+  .profile-custom-html .ops-panel::after,
+  .profile-custom-html .ops-panel::before,
+  .profile-page .profile-main-card > .card-body::before {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
