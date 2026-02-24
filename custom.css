@@ -274,6 +274,26 @@
   letter-spacing: var(--hk-ui-track);
 }
 
+.profile-page .section-links {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, rgba(9, 16, 31, 0.92), rgba(4, 8, 18, 0.94));
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 0 1px rgba(var(--hk-primary-rgb), 0.14);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.profile-page .section-links a {
+  color: var(--hk-accent-bright);
+  font-size: var(--hk-ui-size);
+  letter-spacing: var(--hk-ui-track);
+  text-transform: uppercase;
+}
+
 .profile-page .action-btn,
 .profile-page .contact-link {
   background: linear-gradient(180deg, rgba(40, 63, 126, 0.95), rgba(22, 37, 78, 0.95));
@@ -771,6 +791,54 @@
 }
 
 .profile-page #comments .comment-body [style*="var(--vs-text-dark)"] {
+  color: var(--hk-text) !important;
+}
+
+.profile-page #comments .profile-comment [style*="var(--soft-pink)"] {
+  background: rgba(6, 11, 24, 0.9) !important;
+  border-left: 2px solid rgba(var(--hk-accent-rgb), 0.66) !important;
+}
+
+.profile-page #comments .profile-comment [style*="var(--vs-pink-dark)"] {
+  color: var(--hk-accent-bright) !important;
+}
+
+.profile-page #comments .profile-comment [style*="var(--vs-bg-white)"] {
+  background: rgba(6, 11, 24, 0.9) !important;
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.44) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--hk-primary-rgb), 0.14) !important;
+}
+
+.profile-page #comments .profile-comment [style*="var(--vs-text-dark)"],
+.profile-page #comments .profile-comment .emote-editor-paragraph {
+  color: var(--hk-text) !important;
+}
+
+.profile-page #comments .profile-comment [style*="var(--vs-text-light)"],
+.profile-page #comments .profile-comment [style*="var(--vs-text-medium)"] {
+  color: var(--hk-text-dim) !important;
+}
+
+.profile-page #comments .add-comment > div > div {
+  background: rgba(6, 11, 24, 0.9) !important;
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.44) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--hk-primary-rgb), 0.14) !important;
+}
+
+.profile-page #comments .add-comment [contenteditable="true"][data-lexical-editor="true"],
+.profile-page #comments .comment-body [aria-readonly="true"][data-lexical-editor="true"] {
+  color: var(--hk-text) !important;
+}
+
+.profile-page #comments .profile-comment > .comment-content > div[style*="margin-top"] {
+  background: rgba(6, 11, 24, 0.9) !important;
+  border-left: 2px solid rgba(var(--hk-accent-rgb), 0.66) !important;
+  border-radius: 0 4px 4px 0 !important;
+}
+
+.profile-page #comments .profile-comment .comment-content > div[style*="margin-top"] a,
+.profile-page #comments .profile-comment .comment-content > div[style*="margin-top"] span,
+.profile-page #comments .profile-comment .comment-content > div[style*="margin-top"] div {
   color: var(--hk-text) !important;
 }
 
